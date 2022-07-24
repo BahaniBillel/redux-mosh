@@ -1,17 +1,17 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import store from './store';
+import { bugAdded, bugRemoved, bugResolved } from './actionCreator';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+const unsubsribe = store.subscribe(() =>
+  console.log('the state has changed', store.getState())
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+console.log(store.getState());
+// ADDING A BUG
+store.dispatch(bugAdded('bug1'));
+
+// RESOLVING A BUG
+
+store.dispatch(bugResolved(1));
+
+// REMOVING A BUG
+// store.dispatch(bugRemoved(1));
